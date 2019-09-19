@@ -1,0 +1,129 @@
+//
+//  ElementGridView.swift
+//  Periodic Table
+//
+//  Created by Nhan Cao on 9/18/19.
+//  Copyright © 2019 Nhan Cao. All rights reserved.
+//
+
+import UIKit
+
+@IBDesignable
+class ElementGridView: UIView {
+
+    /*
+    // Only override draw() if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    */
+    
+    var symbol: String = "K"
+    var number: Int = 19
+    
+    func display(symbol: String, number: Int) {
+        self.symbol = symbol
+        self.number = number
+    }
+    
+    override func draw(_ rect: CGRect) {
+        
+        let textColor = UIColor.black
+        let bgColor = backgroundColor(of: number)
+        
+        let edge = min(self.frame.height, self.frame.width)
+        let gridFrame = CGRect(x: (self.frame.width-edge)/2, y: (self.frame.height-edge)/2, width: edge, height: edge)
+        
+        let displayBox = UIBezierPath(rect: gridFrame)
+        displayBox.addClip()
+        bgColor.setFill()
+        displayBox.fill()
+        
+        UIColor.black.setStroke()
+        displayBox.lineWidth = edge*SizeRatio.strokeToEdge
+        displayBox.stroke()
+        
+//        let testBox = UIBezierPath(rect: gridFrame.zoomCenter(to: 0.7))
+//        UIColor.orange.setFill()
+//        testBox.fill()
+        
+        let symbolLabel = UILabel(frame: gridFrame.zoomCenter(to: SizeRatio.symbolMasterBoxToEdge).zoomHeightToCenter(to: SizeRatio.symbolLabelToEdge))
+        symbolLabel.font = UIFont(name: "HelveticaNeue-Bold", size: symbolLabel.frame.height*SizeRatio.fontToHeight)
+        symbolLabel.textAlignment = .center
+        symbolLabel.text = symbol
+        symbolLabel.textColor = textColor
+        symbolLabel.adjustsFontSizeToFitWidth = true
+        
+        self.addSubview(symbolLabel)
+        
+        let numberLabel = UILabel(frame: CGRect(x: gridFrame.minX + edge*SizeRatio.numberLabelOffSetToEdge, y: gridFrame.minY + edge*SizeRatio.numberLabelOffSetToEdge, width: gridFrame.width, height: edge*SizeRatio.numberLabelHeightToEdge) )
+        numberLabel.text = String(number)
+        numberLabel.textColor = textColor
+        numberLabel.font = UIFont(name: "HelveticaNeue", size: numberLabel.frame.height)
+        
+        self.addSubview(numberLabel)
+    }
+    
+    private func backgroundColor(of code: Int) -> UIColor {
+        switch code {
+        case 1, 6...8, 15, 16, 34:
+            // Nonmetal
+            return #colorLiteral(red: 0.6410360932, green: 0.69108814, blue: 0.852938354, alpha: 1)
+        case 2, 10, 18, 36, 54, 86:
+            // Noble Gas
+            return #colorLiteral(red: 0.8033756018, green: 0.6272006035, blue: 0.7920130491, alpha: 1)
+        case 3, 11, 19, 37, 55, 87:
+            // Alkali Metal
+            return #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+        case 4, 12, 20, 38, 56, 88:
+            // Alkaline Earth
+            return #colorLiteral(red: 0.9965631366, green: 0.8223482966, blue: 0.5765100121, alpha: 1)
+        case 5, 14, 32, 33, 51, 52, 84:
+            // Metalloid
+            return #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+        case 9, 17, 35, 53, 85, 117:
+            // Halogen
+            return #colorLiteral(red: 0.6914058924, green: 0.6114787459, blue: 0.7975903153, alpha: 1)
+        case 13, 31, 49, 50, 81...83, 113...116:
+            // Basic Metal
+            return #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+        case 21...30, 39...48, 72...80, 104...112:
+            // Transition Metal
+            return #colorLiteral(red: 0.9657002091, green: 0.9577662349, blue: 0.6001313329, alpha: 1)
+        case 57...71:
+            // Lanthanide
+            return #colorLiteral(red: 0.9353649616, green: 0.6227476597, blue: 0.774107039, alpha: 1)
+        case 89...103:
+            // Actinide
+            return #colorLiteral(red: 0.89069134, green: 0.666757226, blue: 0.8062852025, alpha: 1)
+        default:
+            return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        }
+    }
+ 
+
+}
+
+extension ElementGridView {
+    struct SizeRatio {
+        static let strokeToEdge: CGFloat = 0.1
+        static let symbolMasterBoxToEdge: CGFloat = 0.9
+        static let symbolLabelToEdge: CGFloat = 0.7
+        static let fontToHeight: CGFloat = 0.7
+//        static let numberLabelToEdge: CGFloat = 0.3
+        static let numberLabelOffSetToEdge: CGFloat = 0.1
+        static let numberLabelHeightToEdge: CGFloat = 0.18
+        
+    }
+}
+
+extension CGRect {
+    func zoomCenter(to ratio: CGFloat) -> CGRect {
+        let newWidth = self.width*ratio
+        let newHeight = self.height*ratio
+        return CGRect(x: self.midX-newWidth/2, y: self.midY-newHeight/2, width: newWidth, height: newHeight)
+    }
+    
+    func zoomHeightToCenter(to ratio: CGFloat) -> CGRect {
+        let newHeight = self.height*ratio
+        return CGRect(x: self.minX, y: self.midY-newHeight/2, width: self.width, height: newHeight)
+    }
+}
