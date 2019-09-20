@@ -10,40 +10,58 @@ import UIKit
 
 @IBDesignable
 class ElementGridView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    */
     
-    var symbol: String = "K"
-    var number: Int = 19
+    var symbol: String? = "K"
+    var number: Int? = 19
     
-    func display(symbol: String, number: Int) {
+    var textColor = UIColor.white
+    
+    func display(symbol: String?, number: Int?) {
         self.symbol = symbol
         self.number = number
+    
+        self.setNeedsDisplay()
+    }
+    
+    var isSelected = false {
+        didSet {
+            if isSelected {
+                textColor = UIColor.black
+                self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                self.setNeedsDisplay()
+            } else {
+                textColor = UIColor.white
+                self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                self.setNeedsDisplay()
+            }
+        }
     }
     
     override func draw(_ rect: CGRect) {
         
-        let textColor = UIColor.black
-        let bgColor = backgroundColor(of: number)
+        let subviews = self.subviews
+        for view in subviews {
+            view.removeFromSuperview()
+        }
         
         let edge = min(self.frame.height, self.frame.width)
         let gridFrame = CGRect(x: (self.frame.width-edge)/2, y: (self.frame.height-edge)/2, width: edge, height: edge)
+        self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
-        let displayBox = UIBezierPath(rect: gridFrame)
-        displayBox.addClip()
-        bgColor.setFill()
-        displayBox.fill()
-        
-        UIColor.black.setStroke()
-        displayBox.lineWidth = edge*SizeRatio.strokeToEdge
-        displayBox.stroke()
-        
-//        let testBox = UIBezierPath(rect: gridFrame.zoomCenter(to: 0.7))
-//        UIColor.orange.setFill()
-//        testBox.fill()
+//        let bgColor = getBackgroundColor(of: number)
+//        
+//        let displayBox = UIBezierPath(rect: gridFrame)
+//        displayBox.addClip()
+//        bgColor.setFill()
+//        displayBox.fill()
+//
+//        UIColor.white.setStroke()
+//        displayBox.lineWidth = edge*SizeRatio.strokeToEdge
+//        displayBox.stroke()
+//
+////        let testBox = UIBezierPath(rect: gridFrame.zoomCenter(to: 0.7))
+////        UIColor.orange.setFill()
+////        testBox.fill()
         
         let symbolLabel = UILabel(frame: gridFrame.zoomCenter(to: SizeRatio.symbolMasterBoxToEdge).zoomHeightToCenter(to: SizeRatio.symbolLabelToEdge))
         symbolLabel.font = UIFont(name: "HelveticaNeue-Bold", size: symbolLabel.frame.height*SizeRatio.fontToHeight)
@@ -55,15 +73,23 @@ class ElementGridView: UIView {
         self.addSubview(symbolLabel)
         
         let numberLabel = UILabel(frame: CGRect(x: gridFrame.minX + edge*SizeRatio.numberLabelOffSetToEdge, y: gridFrame.minY + edge*SizeRatio.numberLabelOffSetToEdge, width: gridFrame.width, height: edge*SizeRatio.numberLabelHeightToEdge) )
-        numberLabel.text = String(number)
+        if number != nil {
+            numberLabel.text = String(number!)
+        } else {
+            numberLabel.text = ""
+        }
         numberLabel.textColor = textColor
         numberLabel.font = UIFont(name: "HelveticaNeue", size: numberLabel.frame.height)
         
         self.addSubview(numberLabel)
     }
     
-    private func backgroundColor(of code: Int) -> UIColor {
-        switch code {
+    private func getBackgroundColor(of code: Int?) -> UIColor {
+        if code == nil {
+            return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        }
+        
+        switch code! {
         case 1, 6...8, 15, 16, 34:
             // Nonmetal
             return #colorLiteral(red: 0.6410360932, green: 0.69108814, blue: 0.852938354, alpha: 1)
@@ -108,7 +134,6 @@ extension ElementGridView {
         static let symbolMasterBoxToEdge: CGFloat = 0.9
         static let symbolLabelToEdge: CGFloat = 0.7
         static let fontToHeight: CGFloat = 0.7
-//        static let numberLabelToEdge: CGFloat = 0.3
         static let numberLabelOffSetToEdge: CGFloat = 0.1
         static let numberLabelHeightToEdge: CGFloat = 0.18
         

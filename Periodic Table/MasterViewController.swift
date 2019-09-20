@@ -9,17 +9,32 @@
 import UIKit
 import Foundation
 
+protocol ElementSelectionDelegate: class {
+    func elementSelected(_ element: [String: Any])
+}
+
 class MasterViewController: UITableViewController {
 
     private let jsonFileName = "periodicTable"
     private var data = [String: Any]()
-    private var elements = [[String: Any]]()
+    var elements = [[String: Any]]()
+    
+    weak var delegate: ElementSelectionDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let navigationBGColor = UIColor.white
+        
+        self.navigationController!.navigationBar.isOpaque = true
+        self.navigationController!.navigationBar.barTintColor = navigationBGColor
+        self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
+        
+        self.tableView.backgroundColor = navigationBGColor
 
         // Uncomment the following line to preserve selection between presentations
-         self.clearsSelectionOnViewWillAppear = false
+        self.clearsSelectionOnViewWillAppear = false
         
         let jsonData = readJson(from: jsonFileName)
         if jsonData != nil {
@@ -28,13 +43,11 @@ class MasterViewController: UITableViewController {
             print("Failed to load json")
         }
         
-//        print((data["elements"] as? [Any])!.count )
-        
         if let rawValue = data["elements"] {
             elements = (rawValue as? [[String: Any]]) ?? [[String: Any]]()
         }
         
-        sortElements(by: "name")
+        sortElements(by: "number")
     }
     
     private func sortElements(by key: String) {
@@ -54,61 +67,31 @@ class MasterViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        var cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
-//        if cell == nil {
-//            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
-//            //(style: UITableViewCellStyle.value2, reuseIdentifier: cellIdentifier)
-//        }
-        
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomeTableViewCell
         
         let element = elements[indexPath.row]
-        let symbol = (element["symbol"] as? String) ?? "N/A"
-        let name = (element["name"] as? String) ?? "N/A"
+        let symbol = element["symbol"] as? String
+        let name = (element["name"] as? String) ?? String(indexPath.row)
+        let number = element["number"] as? Int
         
-        let formattedString = NSMutableAttributedString()
-        formattedString
-            .bold(symbol)
-            .normal(" - ")
-            .normal(name)
-        
-        
-        cell.textLabel?.attributedText = formattedString
-        
-        if let number = element["number"] as? Int {
-            cell.detailTextLabel?.text = String(number)
-        }
-        
+        cell.previewView.display(symbol: symbol, number: number)
+        cell.elementNameLabel.text = name
 
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedElement = elements[indexPath.row]
+        delegate?.elementSelected(selectedElement)
+        
+        if let detailViewController = delegate as? DetailViewController {
+            splitViewController?.showDetailViewController(detailViewController, sender: nil)
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
 
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
     }
     */
 
@@ -153,21 +136,21 @@ class MasterViewController: UITableViewController {
     }
 }
 
-extension NSMutableAttributedString {
-    @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
-        let fontName = "HelveticaNeue-Bold"
-        let attrs: [NSAttributedString.Key: Any] = [.font: UIFont(name: fontName, size: 17)!]
-        let boldString = NSMutableAttributedString(string:text, attributes: attrs)
-        append(boldString)
-        
-        return self
-    }
-    
-    @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
-        let normal = NSAttributedString(string: text)
-        append(normal)
-        
-        return self
-    }
-}
+//extension NSMutableAttributedString {
+//    @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
+//        let fontName = "HelveticaNeue-Bold"
+//        let attrs: [NSAttributedString.Key: Any] = [.font: UIFont(name: fontName, size: 17)!]
+//        let boldString = NSMutableAttributedString(string:text, attributes: attrs)
+//        append(boldString)
+//
+//        return self
+//    }
+//
+//    @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
+//        let normal = NSAttributedString(string: text)
+//        append(normal)
+//
+//        return self
+//    }
+//}
 

@@ -16,6 +16,7 @@
 		54CF2929233293490000AFE3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CF2928233293490000AFE3 /* DetailViewController.swift */; };
 		54CF292B23329C970000AFE3 /* periodicTable.json in Resources */ = {isa = PBXBuildFile; fileRef = 54CF292A23329C970000AFE3 /* periodicTable.json */; };
 		54CF292D233338CD0000AFE3 /* ElementGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CF292C233338CD0000AFE3 /* ElementGridView.swift */; };
+		54CF292F233400C20000AFE3 /* CustomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CF292E233400C20000AFE3 /* CustomeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		54CF2928233293490000AFE3 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		54CF292A23329C970000AFE3 /* periodicTable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = periodicTable.json; sourceTree = "<group>"; };
 		54CF292C233338CD0000AFE3 /* ElementGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementGridView.swift; sourceTree = "<group>"; };
+		54CF292E233400C20000AFE3 /* CustomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				54CF291223328E340000AFE3 /* AppDelegate.swift */,
+				54CF292E233400C20000AFE3 /* CustomeTableViewCell.swift */,
 				54CF291423328E340000AFE3 /* ViewController.swift */,
 				54CF2926233292390000AFE3 /* MasterViewController.swift */,
 				54CF2928233293490000AFE3 /* DetailViewController.swift */,
@@ -148,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54CF292F233400C20000AFE3 /* CustomeTableViewCell.swift in Sources */,
 				54CF291523328E340000AFE3 /* ViewController.swift in Sources */,
 				54CF291323328E340000AFE3 /* AppDelegate.swift in Sources */,
 				54CF2927233292390000AFE3 /* MasterViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XLP-X8-1bZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Umi-SG-SCJ">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,23 +19,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DETAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3X-j7-vSK">
-                                <rect key="frame" x="179" y="464.5" width="56" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Element Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3X-j7-vSK">
+                                <rect key="frame" x="94.5" y="261" width="225" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ted-xd-NjJ">
+                                <rect key="frame" x="0.0" y="312" width="414" height="584"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ZK8-xE-gf2">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZK8-xE-gf2" id="6sJ-Yb-FNz">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQL-V5-zvB" customClass="ElementGridView" customModule="Periodic_Table" customModuleProvider="target">
+                                <rect key="frame" x="136.5" y="112" width="141" height="141"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dQL-V5-zvB" secondAttribute="height" multiplier="1:1" id="DAI-8u-O0o"/>
+                                    <constraint firstAttribute="height" constant="141" id="fvs-Lc-OtI"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="j3X-j7-vSK" firstAttribute="centerX" secondItem="VQj-f7-pzG" secondAttribute="centerX" id="piS-8N-OhU"/>
-                            <constraint firstItem="j3X-j7-vSK" firstAttribute="centerY" secondItem="VQj-f7-pzG" secondAttribute="centerY" id="vl5-Qc-jHi"/>
+                            <constraint firstItem="ted-xd-NjJ" firstAttribute="top" secondItem="j3X-j7-vSK" secondAttribute="bottom" constant="8" symbolic="YES" id="0Ti-Dg-QQl"/>
+                            <constraint firstItem="dQL-V5-zvB" firstAttribute="top" secondItem="VQj-f7-pzG" secondAttribute="top" constant="24" id="FlW-nU-EGV"/>
+                            <constraint firstItem="dQL-V5-zvB" firstAttribute="centerX" secondItem="VQj-f7-pzG" secondAttribute="centerX" id="HjK-YM-EVi"/>
+                            <constraint firstItem="ted-xd-NjJ" firstAttribute="bottom" secondItem="VQj-f7-pzG" secondAttribute="bottom" constant="34" id="UTr-BT-856"/>
+                            <constraint firstItem="j3X-j7-vSK" firstAttribute="top" secondItem="dQL-V5-zvB" secondAttribute="bottom" constant="8" symbolic="YES" id="goc-Zx-TYW"/>
+                            <constraint firstItem="VQj-f7-pzG" firstAttribute="trailing" secondItem="ted-xd-NjJ" secondAttribute="trailing" id="pRd-6N-jJr"/>
+                            <constraint firstItem="ted-xd-NjJ" firstAttribute="leading" secondItem="VQj-f7-pzG" secondAttribute="leading" id="qaY-XB-DRQ"/>
+                            <constraint firstItem="j3X-j7-vSK" firstAttribute="centerX" secondItem="VQj-f7-pzG" secondAttribute="centerX" id="twc-sW-fj6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VQj-f7-pzG"/>
                     </view>
+                    <connections>
+                        <outlet property="elementNameLabel" destination="j3X-j7-vSK" id="1tm-ZX-g8F"/>
+                        <outlet property="elementSymbolView" destination="dQL-V5-zvB" id="d3w-Bi-CpT"/>
+                    </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-870" y="-111"/>
+            <point key="canvasLocation" x="-871.01449275362324" y="-111.16071428571428"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="65s-hD-P6W">
@@ -48,10 +80,10 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Q7-OG-bKX" customClass="ElementGridView" customModule="Periodic_Table" customModuleProvider="target">
                                 <rect key="frame" x="20" y="214" width="374" height="456"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Y0W-uK-siv"/>
                     </view>
                 </viewController>
@@ -59,39 +91,53 @@
             </objects>
             <point key="canvasLocation" x="794" y="-58"/>
         </scene>
-        <!--Elements-->
+        <!--Periodic Table-->
         <scene sceneID="8K9-58-PRw">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="se4-Z1-MyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="PaF-oO-u3z" customClass="MasterViewController" customModule="Periodic_Table" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZO0-Kj-X5I">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZO0-Kj-X5I">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="EWe-Hc-fLp" detailTextLabel="ILw-OS-QDN" style="IBUITableViewCellStyleSubtitle" id="Kh0-Jn-wRi">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="99" id="Kh0-Jn-wRi" customClass="CustomeTableViewCell" customModule="Periodic_Table" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="99"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kh0-Jn-wRi" id="3R3-UX-8O2">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EWe-Hc-fLp">
-                                            <rect key="frame" x="20" y="5" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ILw-OS-QDN">
-                                            <rect key="frame" x="20" y="25.5" width="44" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2aJ-Pm-V4w" customClass="ElementGridView" customModule="Periodic_Table" customModuleProvider="target">
+                                            <rect key="frame" x="8" y="8" width="83" height="83"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="vRG-sm-oha"/>
+                                                <constraint firstAttribute="width" secondItem="2aJ-Pm-V4w" secondAttribute="height" multiplier="1:1" id="yMI-8V-aY4"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SH-dE-HSI">
+                                            <rect key="frame" x="99" y="8" width="307" height="83"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="5SH-dE-HSI" firstAttribute="leading" secondItem="2aJ-Pm-V4w" secondAttribute="trailing" constant="8" symbolic="YES" id="FRw-CC-b3H"/>
+                                        <constraint firstItem="2aJ-Pm-V4w" firstAttribute="leading" secondItem="3R3-UX-8O2" secondAttribute="leading" constant="8" id="SSP-oZ-9i2"/>
+                                        <constraint firstAttribute="trailing" secondItem="5SH-dE-HSI" secondAttribute="trailing" constant="8" id="X6p-Yc-eZe"/>
+                                        <constraint firstAttribute="bottom" secondItem="2aJ-Pm-V4w" secondAttribute="bottom" constant="8" id="YGF-6g-5e6"/>
+                                        <constraint firstItem="5SH-dE-HSI" firstAttribute="top" secondItem="2aJ-Pm-V4w" secondAttribute="top" id="eHl-HF-7j8"/>
+                                        <constraint firstItem="5SH-dE-HSI" firstAttribute="height" secondItem="2aJ-Pm-V4w" secondAttribute="height" id="o6b-yP-NQf"/>
+                                        <constraint firstItem="2aJ-Pm-V4w" firstAttribute="top" secondItem="3R3-UX-8O2" secondAttribute="top" constant="8" id="sVw-tP-uha"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="elementNameLabel" destination="5SH-dE-HSI" id="diB-1t-Xrp"/>
+                                    <outlet property="previewView" destination="2aJ-Pm-V4w" id="1xc-Zi-B7Q"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -99,7 +145,7 @@
                             <outlet property="delegate" destination="PaF-oO-u3z" id="itd-va-23M"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Elements" id="ciz-Zx-qU5"/>
+                    <navigationItem key="navigationItem" title="Periodic Table" largeTitleDisplayMode="always" id="ciz-Zx-qU5"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="47.826086956521742" y="-760.04464285714278"/>

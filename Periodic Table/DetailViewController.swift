@@ -10,21 +10,43 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    @IBOutlet weak var elementNameLabel: UILabel!
+    @IBOutlet weak var elementSymbolView: ElementGridView!
+    
+    var elementDetails: [String: Any]? = [String: Any]() {
+        didSet {
+            refreshUI()
+        }
+    }
+    
+    private func refreshUI() {
+        self.loadViewIfNeeded()
+        
+        if let details = elementDetails {
+            elementNameLabel.text = (details["name"] as? String) ?? "N/A"
+            elementSymbolView.display(symbol: details["symbol"] as? String, number: details["number"] as? Int)
+        } else {
+            elementNameLabel.text = "Periodic Table"
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        refreshUI()
     }
     
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension DetailViewController: ElementSelectionDelegate {
+    func elementSelected(_ element: [String : Any]) {
+        elementDetails = element
     }
-    */
-
 }
