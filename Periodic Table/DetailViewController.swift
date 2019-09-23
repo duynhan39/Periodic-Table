@@ -27,9 +27,7 @@ class DetailViewController: UIViewController {
             elementSymbolView.display(symbol: details["symbol"] as? String, number: details["number"] as? Int)
         } else {
             elementNameLabel.text = "Periodic Table"
-            
         }
-        
     }
     
     override func viewDidLoad() {

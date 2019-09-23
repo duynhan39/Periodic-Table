@@ -13,7 +13,6 @@
         <!--Detail View Controller-->
         <scene sceneID="047-EC-K3U">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LtS-Z2-IxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="QTl-ab-nWG" customClass="DetailViewController" customModule="Periodic_Table" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="47x-pL-efd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -25,16 +24,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ted-xd-NjJ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ted-xd-NjJ" customClass="DetailTableView" customModule="Periodic_Table" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="312" width="414" height="584"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ZK8-xE-gf2">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Okg-tv-UAF" detailTextLabel="D4h-uA-5Bu" style="IBUITableViewCellStyleValue1" id="ZK8-xE-gf2">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZK8-xE-gf2" id="6sJ-Yb-FNz">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Okg-tv-UAF">
+                                                    <rect key="frame" x="20" y="12" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D4h-uA-5Bu">
+                                                    <rect key="frame" x="350" y="12" width="44" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -66,6 +81,7 @@
                         <outlet property="elementSymbolView" destination="dQL-V5-zvB" id="d3w-Bi-CpT"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LtS-Z2-IxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-871.01449275362324" y="-111.16071428571428"/>
         </scene>
@@ -94,7 +110,6 @@
         <!--Periodic Table-->
         <scene sceneID="8K9-58-PRw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="se4-Z1-MyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="PaF-oO-u3z" customClass="MasterViewController" customModule="Periodic_Table" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZO0-Kj-X5I">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -147,13 +162,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Periodic Table" largeTitleDisplayMode="always" id="ciz-Zx-qU5"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="se4-Z1-MyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="47.826086956521742" y="-760.04464285714278"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lzs-LZ-5de">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lz3-du-6ri" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="4CA-fi-Rez" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="08t-M1-1YZ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -163,19 +178,20 @@
                         <segue destination="PaF-oO-u3z" kind="relationship" relationship="rootViewController" id="EAe-MH-qP6"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lz3-du-6ri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-870" y="-760"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="khh-5B-L3f">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="src-Oo-C3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <splitViewController id="Umi-SG-SCJ" sceneMemberID="viewController">
                     <connections>
                         <segue destination="4CA-fi-Rez" kind="relationship" relationship="masterViewController" id="r2T-Ko-3jS"/>
                         <segue destination="QTl-ab-nWG" kind="relationship" relationship="detailViewController" id="XZc-QJ-Cr6"/>
                     </connections>
                 </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="src-Oo-C3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1789" y="-436"/>
         </scene>
