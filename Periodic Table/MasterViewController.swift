@@ -9,17 +9,23 @@
 import UIKit
 import Foundation
 
-protocol ElementSelectionDelegate: class {
-    func elementSelected(_ element: [String: Any])
-}
-
 class MasterViewController: UITableViewController {
-
+    
     private let jsonFileName = "periodicTable"
     private var data = [String: Any]()
     var elements = [[String: Any]]()
     
-    weak var delegate: ElementSelectionDelegate?
+    var sortKeyIndex = 0
+    let sortKeys = ["number", "symbol", "name"]
+    
+    @IBAction func sortButton(_ sender: Any) {
+        sortKeyIndex = (sortKeyIndex + 1) % sortKeys.count
+        let key = sortKeys[sortKeyIndex]
+        print("\(key) -- \(sortKeyIndex)")
+        sortElements(by: key)
+        
+        self.tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +35,6 @@ class MasterViewController: UITableViewController {
         self.navigationController!.navigationBar.isOpaque = true
         self.navigationController!.navigationBar.barTintColor = navigationBGColor
         self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        
         
         self.tableView.backgroundColor = navigationBGColor
 
@@ -51,7 +56,11 @@ class MasterViewController: UITableViewController {
     }
     
     private func sortElements(by key: String) {
-        elements.sort(by: { lhs, rhs in return (lhs[key] as? String) ?? "N/A" < (rhs[key] as? String) ?? "N/A" })
+        if elements.first?[key] is Double {
+            elements.sort(by: { lhs, rhs in return (lhs[key] as? Double) ?? 0 < (rhs[key] as? Double) ?? 0 })
+        } else {
+            elements.sort(by: { lhs, rhs in return (lhs[key] as? String) ?? "N/A" < (rhs[key] as? String) ?? "N/A" })
+        }
     }
 
     // MARK: - Table view data source
@@ -79,15 +88,6 @@ class MasterViewController: UITableViewController {
 
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedElement = elements[indexPath.row]
-        delegate?.elementSelected(selectedElement)
-        
-        if let detailViewController = delegate as? DetailViewController {
-            splitViewController?.showDetailViewController(detailViewController, sender: nil)
-        }
-    }
 
     /*
     // Override to support rearranging the table view.
@@ -103,15 +103,26 @@ class MasterViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "showDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let selectedElement = elements[indexPath.row]
+                
+                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+                controller.elementInfo = selectedElement
+                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                controller.navigationItem.leftItemsSupplementBackButton = true
+            }
+        }
     }
-    */
+ 
     
     
 }

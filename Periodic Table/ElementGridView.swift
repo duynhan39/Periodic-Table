@@ -48,20 +48,7 @@ class ElementGridView: UIView {
             self.setNeedsDisplay()
         }
     }
-//    static var x = 0
     override func draw(_ rect: CGRect) {
-//        ElementGridView.x+=1
-//        print("draw \(ElementGridView.x)")
-        
-        if isSelected {
-            textColor = UIColor.black
-            self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        } else {
-            textColor = UIColor.white
-            self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        }
-        self.setNeedsDisplay()
-        
         
         let subviews = self.subviews
         for view in subviews {
@@ -70,23 +57,32 @@ class ElementGridView: UIView {
         
         let edge = min(self.frame.height, self.frame.width)
         let gridFrame = CGRect(x: (self.frame.width-edge)/2, y: (self.frame.height-edge)/2, width: edge, height: edge)
-        self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
+        var bgColor:UIColor
+        if isSelected {
+            textColor = UIColor.black
+            bgColor = UIColor.white
+        } else {
+            textColor = UIColor.white
+            bgColor = UIColor.black
+        }
         
 ////////////////////////////////
-//        COLOR
-//        let bgColor = getBackgroundColor(of: number)
-//        
-//        let displayBox = UIBezierPath(rect: gridFrame)
-//        displayBox.addClip()
-//        bgColor.setFill()
-//        displayBox.fill()
+//
+//      COLOR
+//
+//        bgColor = getBackgroundColor(of: number)
 //
 //        UIColor.white.setStroke()
 //        displayBox.lineWidth = edge*SizeRatio.strokeToEdge
 //        displayBox.stroke()
 //
 ////////////////////////////////
+        
+        let displayBox = UIBezierPath(rect: gridFrame)
+        displayBox.addClip()
+        bgColor.setFill()
+        displayBox.fill()
         
         let symbolLabel = UILabel(frame: gridFrame.zoomCenter(to: SizeRatio.symbolMasterBoxToEdge).zoomHeightToCenter(to: SizeRatio.symbolLabelToEdge))
         symbolLabel.font = UIFont(name: "HelveticaNeue-Bold", size: symbolLabel.frame.height*SizeRatio.fontToHeight)

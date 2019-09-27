@@ -22,6 +22,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         elementDetailTable.dataSource = self
+        refreshUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,18 +30,9 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         refreshUI()
     }
     
-//    viewDidLayoutSubviews
-    
-    
     var elementInfo: [String: Any]? = [String: Any]() {
         didSet {
             if self.elementInfo == nil {
-//                detailKeys = Array(self.elementInfo!.keys)
-//                detailKeys.removeAll { (k) -> Bool in
-//                    ["name", "number", "symbol", "xpos", "ypos", "spectral_img"].contains(k)
-//                }
-//                detailKeys.sort()
-//            } else {
                 self.elementInfo = [String: Any]()
             }
             refreshUI()
@@ -78,28 +70,16 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     
     private func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return SectionHeaderHeight
-//        let sectionName = Array(DetailViewController.Sections.keys)[section]
-//        if let section = DetailViewController.Sections[sectionName], section.count > 0 {
-//            return SectionHeaderHeight
-//        }
-//        return 0
     }
     
     private func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: SectionHeaderHeight))
         view.backgroundColor = UIColor.black
-        
-//        tableView.addSubview(view)
         
         let label = UILabel(frame: CGRect(x: 15, y: 0, width: tableView.bounds.width - 30, height: SectionHeaderHeight))
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textColor = UIColor.white
-        
-        
-        print(sectionsHeader[section])
-        
         
         label.text = sectionsHeader[section]
         view.addSubview(label)
@@ -111,11 +91,10 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath)
         
         let sectionName = sectionsHeader[indexPath.section]
-        print(sectionName)
         let section = DetailViewController.Sections[sectionName] ?? [String]()
         
         var detailName: String = section[indexPath.row]
-        var detailInfo = convertToString(from: elementInfo![detailName])
+        var detailInfo = DetailViewController.convertToString(from: elementInfo![detailName])
         detailInfo = detailInfo.prefix(1).capitalized + detailInfo.dropFirst()
         if detailInfo == "---" {
             cell.textLabel?.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
@@ -136,7 +115,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
 }
 
 extension DetailViewController {
-    func convertToString(from object: Any?) -> String {
+    static func convertToString(from object: Any?) -> String {
         if object == nil {
             return "---"
         }
@@ -151,7 +130,7 @@ extension DetailViewController {
         case let a as [Any]:
             var str = ""
             for e in a {
-                str += "\(convertToString(from: e))\n"
+                str += "\(DetailViewController.convertToString(from: e))\n"
             }
             return String(str.dropLast())
         default:
@@ -167,45 +146,3 @@ extension DetailViewController {
     ]
 
 }
-
-extension DetailViewController: ElementSelectionDelegate {
-    func elementSelected(_ element: [String : Any]) {
-        elementInfo = element
-    }
-}
-
-//extension UITableView {
-//
-////    public func reloadData(_ completion: @escaping ()->()) {
-////        UIView.animate(withDuration: 0, animations: {
-////            self.reloadData()
-////        }, completion:{ _ in
-////            completion()
-////        })
-////    }
-//
-//    func scroll(to: scrollsTo, animated: Bool) {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
-//            let numberOfSections = self.numberOfSections
-//            let numberOfRows = self.numberOfRows(inSection: numberOfSections-1)
-//            switch to{
-//            case .top:
-//                if numberOfRows > 0 {
-//                    let indexPath = IndexPath(row: 0, section: 0)
-//                    self.scrollToRow(at: indexPath, at: .top, animated: animated)
-//                }
-//                break
-//            case .bottom:
-//                if numberOfRows > 0 {
-//                    let indexPath = IndexPath(row: numberOfRows-1, section: (numberOfSections-1))
-//                    self.scrollToRow(at: indexPath, at: .bottom, animated: animated)
-//                }
-//                break
-//            }
-//        }
-//    }
-//
-//    enum scrollsTo {
-//        case top,bottom
-//    }
-//}

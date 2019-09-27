@@ -79,6 +79,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VQj-f7-pzG"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ZzY-wm-vGk"/>
                     <connections>
                         <outlet property="elementDetailTable" destination="ted-xd-NjJ" id="Twj-gD-W51"/>
                         <outlet property="elementNameLabel" destination="j3X-j7-vSK" id="1tm-ZX-g8F"/>
@@ -87,29 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LtS-Z2-IxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-396" y="-58"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="65s-hD-P6W">
-            <objects>
-                <viewController id="XLP-X8-1bZ" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="LFX-k6-G7f">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Q7-OG-bKX" customClass="ElementGridView" customModule="Periodic_Table" customModuleProvider="target">
-                                <rect key="frame" x="20" y="214" width="374" height="456"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Y0W-uK-siv"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WqK-NH-0uM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="794" y="-58"/>
+            <point key="canvasLocation" x="48" y="-60"/>
         </scene>
         <!--Periodic Table-->
         <scene sceneID="8K9-58-PRw">
@@ -156,6 +135,7 @@
                                 <connections>
                                     <outlet property="elementNameLabel" destination="5SH-dE-HSI" id="diB-1t-Xrp"/>
                                     <outlet property="previewView" destination="2aJ-Pm-V4w" id="1xc-Zi-B7Q"/>
+                                    <segue destination="XTg-If-eA6" kind="showDetail" identifier="showDetail" id="mpu-Tb-BZq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -164,11 +144,17 @@
                             <outlet property="delegate" destination="PaF-oO-u3z" id="itd-va-23M"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Periodic Table" largeTitleDisplayMode="always" id="ciz-Zx-qU5"/>
+                    <navigationItem key="navigationItem" title="Periodic Table" largeTitleDisplayMode="always" id="ciz-Zx-qU5">
+                        <barButtonItem key="rightBarButtonItem" title="Sort" style="plain" id="aUW-kM-tkx">
+                            <connections>
+                                <action selector="sortButton:" destination="PaF-oO-u3z" id="seR-3o-XTs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="se4-Z1-MyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="47.826086956521742" y="-760.04464285714278"/>
+            <point key="canvasLocation" x="48" y="-869"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lzs-LZ-5de">
@@ -184,7 +170,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lz3-du-6ri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-871" y="-760"/>
+            <point key="canvasLocation" x="-871" y="-869"/>
         </scene>
         <!--Main Split View Controller-->
         <scene sceneID="khh-5B-L3f">
@@ -192,12 +178,33 @@
                 <splitViewController id="Umi-SG-SCJ" customClass="MainSplitViewController" customModule="Periodic_Table" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="4CA-fi-Rez" kind="relationship" relationship="masterViewController" id="r2T-Ko-3jS"/>
-                        <segue destination="QTl-ab-nWG" kind="relationship" relationship="detailViewController" id="XZc-QJ-Cr6"/>
+                        <segue destination="XTg-If-eA6" kind="relationship" relationship="detailViewController" id="XZc-QJ-Cr6"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="src-Oo-C3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1789" y="-436"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="DH4-KH-9gL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XTg-If-eA6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UcW-DH-Oy2">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QTl-ab-nWG" kind="relationship" relationship="rootViewController" id="KdP-do-S8O"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LRh-jH-hIT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-871" y="-60"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="mpu-Tb-BZq"/>
+    </inferredMetricsTieBreakers>
 </document>
