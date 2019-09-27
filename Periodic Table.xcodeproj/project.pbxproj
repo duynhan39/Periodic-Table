@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		549EE3E2233DE5B6004631DD /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549EE3E1233DE5B6004631DD /* MainSplitViewController.swift */; };
 		54CF291323328E340000AFE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CF291223328E340000AFE3 /* AppDelegate.swift */; };
 		54CF291523328E340000AFE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CF291423328E340000AFE3 /* ViewController.swift */; };
 		54CF291823328E340000AFE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54CF291623328E340000AFE3 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		549EE3E1233DE5B6004631DD /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		54CF290F23328E340000AFE3 /* Periodic Table.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Periodic Table.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54CF291223328E340000AFE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54CF291423328E340000AFE3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				54CF2926233292390000AFE3 /* MasterViewController.swift */,
 				54CF2928233293490000AFE3 /* DetailViewController.swift */,
 				54CF291623328E340000AFE3 /* Main.storyboard */,
+				549EE3E1233DE5B6004631DD /* MainSplitViewController.swift */,
 				54CF292A23329C970000AFE3 /* periodicTable.json */,
 				54CF292C233338CD0000AFE3 /* ElementGridView.swift */,
 				54CF291923328E360000AFE3 /* Assets.xcassets */,
@@ -154,6 +157,7 @@
 				54CF292F233400C20000AFE3 /* CustomeTableViewCell.swift in Sources */,
 				54CF291523328E340000AFE3 /* ViewController.swift in Sources */,
 				54CF291323328E340000AFE3 /* AppDelegate.swift in Sources */,
+				549EE3E2233DE5B6004631DD /* MainSplitViewController.swift in Sources */,
 				54CF2927233292390000AFE3 /* MasterViewController.swift in Sources */,
 				54CF292D233338CD0000AFE3 /* ElementGridView.swift in Sources */,
 				54CF2929233293490000AFE3 /* DetailViewController.swift in Sources */,

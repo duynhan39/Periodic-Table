@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let detailViewController = splitViewController.viewControllers.last as? DetailViewController
             else { fatalError() }
         
-        let firstElement = masterViewController.elements.first
-        detailViewController.elementDetails = firstElement
+//        let firstElement = masterViewController.elements.first
+//        detailViewController.elementInfo = firstElement
         
         masterViewController.delegate = detailViewController
         
