@@ -113,6 +113,10 @@ class MasterViewController: UITableViewController {
     }
     */
     
+    
+}
+
+extension MasterViewController {
     private func readJson(from file: String) -> [String: Any]? {
         do {
             if let file = Bundle.main.url(forResource: file, withExtension: "json") {
@@ -120,9 +124,9 @@ class MasterViewController: UITableViewController {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let object = json as? [String: Any] {
                     return object
-//                } else if let object = json as? [Any] {
-//                    // json is an array
-//                    print(object)
+                    //                } else if let object = json as? [Any] {
+                    //                    // json is an array
+                    //                    print(object)
                 } else {
                     print("JSON is invalid")
                 }
@@ -135,22 +139,4 @@ class MasterViewController: UITableViewController {
         return nil
     }
 }
-
-//extension NSMutableAttributedString {
-//    @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
-//        let fontName = "HelveticaNeue-Bold"
-//        let attrs: [NSAttributedString.Key: Any] = [.font: UIFont(name: fontName, size: 17)!]
-//        let boldString = NSMutableAttributedString(string:text, attributes: attrs)
-//        append(boldString)
-//
-//        return self
-//    }
-//
-//    @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
-//        let normal = NSAttributedString(string: text)
-//        append(normal)
-//
-//        return self
-//    }
-//}
 

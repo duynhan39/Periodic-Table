@@ -13,6 +13,10 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var elementNameLabel: UILabel!
     @IBOutlet weak var elementSymbolView: ElementGridView!
     @IBOutlet weak var elementDetailTable: UITableView!
+    
+    var SectionHeaderHeight: CGFloat = 25
+    
+    private var sectionsHeader = ["Summary", "General", "Properties", "Source"]
 
     
     override func viewDidLoad() {
@@ -25,16 +29,18 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         refreshUI()
     }
     
+//    viewDidLayoutSubviews
+    
     
     var elementInfo: [String: Any]? = [String: Any]() {
         didSet {
-            if self.elementInfo != nil {
-                detailKeys = Array(self.elementInfo!.keys)
-                detailKeys.removeAll { (k) -> Bool in
-                    ["name", "number", "symbol", "xpos", "ypos", "summary", "spectral_img"].contains(k)
-                }
-                detailKeys.sort()
-            } else {
+            if self.elementInfo == nil {
+//                detailKeys = Array(self.elementInfo!.keys)
+//                detailKeys.removeAll { (k) -> Bool in
+//                    ["name", "number", "symbol", "xpos", "ypos", "spectral_img"].contains(k)
+//                }
+//                detailKeys.sort()
+//            } else {
                 self.elementInfo = [String: Any]()
             }
             refreshUI()
@@ -48,6 +54,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         
         if let details = elementInfo {
             elementNameLabel.text = (details["name"] as? String) ?? "N/A"
+//            print("\(details["symbol"] as? String) -- \(details["number"] as? Int)" )
             elementSymbolView.display(symbol: details["symbol"] as? String, number: details["number"] as? Int)
             self.elementDetailTable.reloadData()
         }
@@ -59,14 +66,55 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionsHeader.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return detailKeys.count
+        let sectionName = sectionsHeader[section]
+        let section = DetailViewController.Sections[sectionName] ?? [String]()
+        return section.count
+    }
+    
+    private func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return SectionHeaderHeight
+//        let sectionName = Array(DetailViewController.Sections.keys)[section]
+//        if let section = DetailViewController.Sections[sectionName], section.count > 0 {
+//            return SectionHeaderHeight
+//        }
+//        return 0
+    }
+    
+    private func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: SectionHeaderHeight))
+        view.backgroundColor = UIColor.black
+        
+//        tableView.addSubview(view)
+        
+        let label = UILabel(frame: CGRect(x: 15, y: 0, width: tableView.bounds.width - 30, height: SectionHeaderHeight))
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textColor = UIColor.white
+        
+        
+        print(sectionsHeader[section])
+        
+        
+        label.text = sectionsHeader[section]
+        view.addSubview(label)
+        
+        return view
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath)
         
-        var detailName: String = detailKeys[indexPath.row]
+        let sectionName = sectionsHeader[indexPath.section]
+        print(sectionName)
+        let section = DetailViewController.Sections[sectionName] ?? [String]()
+        
+        var detailName: String = section[indexPath.row]
         var detailInfo = convertToString(from: elementInfo![detailName])
         detailInfo = detailInfo.prefix(1).capitalized + detailInfo.dropFirst()
         if detailInfo == "---" {
@@ -85,9 +133,6 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         
         return cell
     }
-    
-    
-
 }
 
 extension DetailViewController {
@@ -114,9 +159,12 @@ extension DetailViewController {
         }
     }
     
-//    static let Section = [
-//        "General" : ["appearance", "color", "phase" ]
-//    ]
+    static let Sections = [
+        "Summary" : ["summary"],
+        "General" : ["appearance", "color", "phase", "category"],
+        "Properties" : ["atomic_mass", "density", "boil", "melt", "molar_heat"],
+        "Source" : ["source"]
+    ]
 
 }
 

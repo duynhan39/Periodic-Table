@@ -28,6 +28,7 @@ class CustomeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         previewView.isSelected = selected
+        
         if selected {
             self.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             elementNameLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)

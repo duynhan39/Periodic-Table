@@ -16,6 +16,19 @@ class ElementGridView: UIView {
     
     var textColor = UIColor.white
     
+    
+    override var bounds: CGRect {
+        didSet {
+            setNeedsLayout()
+            setNeedsDisplay()
+        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        setNeedsLayout()
+        setNeedsDisplay()
+    }
+    
     func display(symbol: String?, number: Int?) {
         self.symbol = symbol
         self.number = number
@@ -27,17 +40,28 @@ class ElementGridView: UIView {
         didSet {
             if isSelected {
                 textColor = UIColor.black
-                self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                self.setNeedsDisplay()
+                self.backgroundColor = UIColor.white
             } else {
                 textColor = UIColor.white
-                self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-                self.setNeedsDisplay()
+                self.backgroundColor = UIColor.black
             }
+            self.setNeedsDisplay()
         }
     }
-    
+//    static var x = 0
     override func draw(_ rect: CGRect) {
+//        ElementGridView.x+=1
+//        print("draw \(ElementGridView.x)")
+        
+        if isSelected {
+            textColor = UIColor.black
+            self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        } else {
+            textColor = UIColor.white
+            self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        }
+        self.setNeedsDisplay()
+        
         
         let subviews = self.subviews
         for view in subviews {
@@ -48,6 +72,9 @@ class ElementGridView: UIView {
         let gridFrame = CGRect(x: (self.frame.width-edge)/2, y: (self.frame.height-edge)/2, width: edge, height: edge)
         self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
+        
+////////////////////////////////
+//        COLOR
 //        let bgColor = getBackgroundColor(of: number)
 //        
 //        let displayBox = UIBezierPath(rect: gridFrame)
@@ -59,9 +86,7 @@ class ElementGridView: UIView {
 //        displayBox.lineWidth = edge*SizeRatio.strokeToEdge
 //        displayBox.stroke()
 //
-////        let testBox = UIBezierPath(rect: gridFrame.zoomCenter(to: 0.7))
-////        UIColor.orange.setFill()
-////        testBox.fill()
+////////////////////////////////
         
         let symbolLabel = UILabel(frame: gridFrame.zoomCenter(to: SizeRatio.symbolMasterBoxToEdge).zoomHeightToCenter(to: SizeRatio.symbolLabelToEdge))
         symbolLabel.font = UIFont(name: "HelveticaNeue-Bold", size: symbolLabel.frame.height*SizeRatio.fontToHeight)
