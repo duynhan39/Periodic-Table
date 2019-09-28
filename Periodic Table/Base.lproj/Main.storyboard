@@ -145,7 +145,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Periodic Table" largeTitleDisplayMode="always" id="ciz-Zx-qU5">
-                        <barButtonItem key="rightBarButtonItem" title="Sort" style="plain" id="aUW-kM-tkx">
+                        <barButtonItem key="rightBarButtonItem" title="Sort" id="aUW-kM-tkx">
                             <connections>
                                 <action selector="sortButton:" destination="PaF-oO-u3z" id="seR-3o-XTs"/>
                             </connections>
