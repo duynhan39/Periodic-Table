@@ -1,6 +1,6 @@
 # Periodic Table
 
-<img src="./Periodic Table/periodictable.svg" width="350">
+<img src="./periodictable.svg" width="350">
 
 List of 119 elements in the periodic table
 
